@@ -29,7 +29,7 @@ use crate::{
         Fullscreen, OsError,
     },
     window::{
-        CursorGrabMode, CursorIcon, Theme, UserAttentionType, WindowAttributes,
+        CursorGrabMode, CursorIcon, ResizeDirection, Theme, UserAttentionType, WindowAttributes,
         WindowId as RootWindowId,
     },
 };
@@ -682,6 +682,11 @@ impl WinitWindow {
         let event = NSApp().currentEvent();
         self.performWindowDragWithEvent(event.as_deref());
         Ok(())
+    }
+
+    #[inline]
+    pub fn drag_resize_window(&self, _direction: ResizeDirection) -> Result<(), ExternalError> {
+        Err(ExternalError::NotSupported(NotSupportedError::new()))
     }
 
     #[inline]
